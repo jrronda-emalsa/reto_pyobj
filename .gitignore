@@ -1,5 +1,6 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
+juego_zombis/__pycache__/
 *.py[cod]
 
 # C extensions
@@ -56,5 +57,4 @@ docs/_build/
 
 # PyBuilder
 target/
-juego_zombis/__pycache__/persona.cpython-38.pyc
-juego_zombis/__pycache__/zombi.cpython-38.pyc
+
