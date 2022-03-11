@@ -15,10 +15,17 @@ print()
 print("  Los zombis avanzan 1, 2 ó 3 calles.")
 print("  Tú puedes avanzar 1, 2 ó 3 calles.")
 print()
-nombre = input("  ¿Estás preparado? Cual es tu nombre: ").capitalize()
 
 
-jugador = Persona(nombre)
+numero = ""
+while numero not in ("1", "2", "3", "4"):
+    numero = input("  Número de jugadores (1/4): ")
+
+jugadores = []
+for i in range(1, int(numero)+1):
+    nombre = input("  Nombre del " + str(i) + "º jugador: ").capitalize()
+    jugador = Persona(nombre)
+    jugadores.append(jugador)
 
 
 horda = []
@@ -30,9 +37,12 @@ for i in range(10):
 
 while True:
     os.system("clear")
-
-    print()
-    print(jugador.situacion())
+ 
+    print("  NOMBRE    -   CALLE   -   ENERGÍA")
+    print("  ---------------------------------")
+    for jugador in jugadores:
+        nom, cal, ene = jugador.situacion()
+        print("  {:8}  -    {:2}     -     {:2}".format(nom, cal, ene))
     print()
 
     calles = []
@@ -47,12 +57,18 @@ while True:
     print()
     print()
 
-    if jugador.calle > 40:
-        print("  No te ha visto ningún zombi.")
-        print("  Te has librado de ser comido.")
+    
+    ganadores = []
+    for jugador in jugadores:
+        if jugador.calle > 40:
+            ganadores.append(jugador)
+    if len(ganadores) >0:
+        for jugador in ganadores:
+            print("  {}, has escapado de los zombis.".format(jugador.nombre))
+        print("  Has/Han ganado la partida.")
         print()
         break
-
+# ---------------AQUÍ ME QUEDE, MINUTO 3:40 VÍDEO 5
     comido = False
     for zombi in horda:
         if zombi.calle == jugador.calle:
